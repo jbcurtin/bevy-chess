@@ -17,17 +17,9 @@ fn main() {
 
 fn setup(
     mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-    commands.spawn_bundle(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Plane { size: 8.0 })),
-        material: materials.add(Color::rgb(1.0, 0.9, 0.9).into()),
-        transform: Transform::from_translation(Vec3::new(0.0, 0., 0.0 )),
-        ..Default::default()
-    });
     commands.spawn_bundle(PerspectiveCameraBundle {
-        transform: Transform::from_xyz(0.0, 5.0, 5.)
+        transform: Transform::from_xyz(0.0, 5.0, 8.)
             .looking_at(Vec3::ZERO, Vec3::Y),
         ..Default::default()
     });
@@ -61,7 +53,7 @@ fn create_board(
                 } else {
                     black_material.clone()
                 },
-                transform: Transform::from_translation(Vec3::new(i as f32, 0., j as f32)),
+                transform: Transform::from_translation(Vec3::new(i as f32 - 3.5, 0., j as f32 - 3.5 )),
                 ..Default::default()
             });
         }
