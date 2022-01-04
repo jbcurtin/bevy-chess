@@ -12,6 +12,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_startup_system(setup)
         .add_startup_system(create_board)
+        .add_startup_system(create_pieces)
         .run();
 }
 
@@ -58,4 +59,32 @@ fn create_board(
             });
         }
     }
+}
+fn create_pieces (
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    mut materials: ResMut<Assets<StandardMaterial>>,
+) {
+
+    /// let king_handle: Handle<Mesh> = asset_server.load("models/pieces.glb#Mesh0/Primitive0");
+    let king_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh0/Primitive0");
+    let queen_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh1/Primitive0");
+    let bishop_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh2/Primitive0");
+    let knight_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh3/Primitive0");
+    let rook_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh4/Primitive0");
+    let pawn_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh5/Primitive0");
+
+    let white_material = materials.add(Color::rgb(1.0, 0.8, 0.8).into());
+    let black_material = materials.add(Color::rgb(0.0, 0.2, 0.2).into());
+
+    commands.spawn_bundle(PbrBundle {
+        mesh: pawn_handle.clone(),
+        material: black_material.clone(),
+        transform: {
+            let mut transform = Transform::from_translation(Vec3::new(-0.2, 0., -1.9));
+            transform.apply_non_uniform_scale(Vec3::new(0.2, 0.2, 0.2));
+            transform
+        },
+        ..Default::default()
+    });
 }
