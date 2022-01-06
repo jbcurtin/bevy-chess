@@ -12,6 +12,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_startup_system(setup)
         .add_startup_system(create_board)
+        .add_startup_system(create_game)
         .add_startup_system(create_white_pieces)
         .add_startup_system(create_black_pieces)
         .run();
@@ -61,6 +62,13 @@ fn create_board(
         }
     }
 }
+
+fn create_game (
+    mut commands: Commands,
+) {
+
+}
+
 fn create_white_pieces (
     mut commands: Commands,
     asset_server: Res<AssetServer>,

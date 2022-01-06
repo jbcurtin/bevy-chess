@@ -185,6 +185,7 @@ name = "bevy-chess"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "bevy_mod_picking",
 ]
 
 [[package]]
@@ -452,6 +453,24 @@ source = "git+https://github.com/bevyengine/bevy.git?branch=main#d44c3cd15009797
 dependencies = [
  "bevy_reflect",
  "glam",
+]
+
+[[package]]
+name = "bevy_mod_picking"
+version = "0.4.1-alpha.0"
+source = "git+https://github.com/aevyrie/bevy_mod_picking.git?rev=56113c5#56113c5ba478866a7fc0a72938a24f174032c6ad"
+dependencies = [
+ "bevy",
+ "bevy_mod_raycast",
+]
+
+[[package]]
+name = "bevy_mod_raycast"
+version = "0.2.2"
+source = "git+https://github.com/aevyrie/bevy_mod_raycast?branch=master#b903e2f7cb745f65cb930618b5e9b365149852f3"
+dependencies = [
+ "bevy",
+ "wgpu",
 ]
 
 [[package]]

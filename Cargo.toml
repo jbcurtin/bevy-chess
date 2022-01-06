@@ -8,3 +8,4 @@ authors = ["rust@jbcurtin.io"]
 
 [dependencies]
 bevy = { branch = "main", git = "https://github.com/bevyengine/bevy.git" }
+bevy_mod_picking = { rev = "56113c5", git = "https://github.com/aevyrie/bevy_mod_picking.git" }
