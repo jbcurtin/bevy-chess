@@ -12,7 +12,8 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_startup_system(setup)
         .add_startup_system(create_board)
-        .add_startup_system(create_pieces)
+        .add_startup_system(create_white_pieces)
+        .add_startup_system(create_black_pieces)
         .run();
 }
 
@@ -60,31 +61,197 @@ fn create_board(
         }
     }
 }
-fn create_pieces (
+fn create_white_pieces (
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-
-    /// let king_handle: Handle<Mesh> = asset_server.load("models/pieces.glb#Mesh0/Primitive0");
     let king_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh0/Primitive0");
     let queen_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh1/Primitive0");
     let bishop_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh2/Primitive0");
     let knight_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh3/Primitive0");
     let rook_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh4/Primitive0");
     let pawn_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh5/Primitive0");
-
     let white_material = materials.add(Color::rgb(1.0, 0.8, 0.8).into());
-    let black_material = materials.add(Color::rgb(0.0, 0.2, 0.2).into());
+    
 
-    commands.spawn_bundle(PbrBundle {
-        mesh: pawn_handle.clone(),
-        material: black_material.clone(),
-        transform: {
-            let mut transform = Transform::from_translation(Vec3::new(-0.2, 0., -1.9));
-            transform.apply_non_uniform_scale(Vec3::new(0.2, 0.2, 0.2));
-            transform
-        },
+    let king_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0.0, 0., 0.0)),
         ..Default::default()
-    });
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: king_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(-0.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    
+    let queen_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0. ,0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: queen_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(0.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let king_bishop_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: bishop_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(-1.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let queen_bishop_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: bishop_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(1.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let king_knight_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: knight_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(-2.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let queen_knight_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: knight_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(2.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let king_rook_identity = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: rook_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(-3.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let queen_rook_identity  = commands.spawn_bundle(PbrBundle {
+        transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+        ..Default::default()
+    })
+    .with_children(|parent| {
+        parent.spawn_bundle(PbrBundle {
+            mesh: rook_handle.clone(),
+            material: white_material.clone(),
+            transform: {
+                let mut transform = Transform::from_translation(Vec3::new(3.5, 0., 3.8));
+                transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                transform.rotate(Quat::from_rotation_x(1.65));
+                transform.rotate(Quat::from_rotation_y(1.35));
+                transform
+            },
+            ..Default::default()
+        });
+    }).id();
+    let x_position_start = -3.5;
+    for idx in 0..8 {
+        let pawn_identity = commands.spawn_bundle(PbrBundle {
+            transform: Transform::from_translation(Vec3::new(0., 0., 0.)),
+            ..Default::default()
+        }).with_children(|parent| {
+            parent.spawn_bundle(PbrBundle {
+                mesh: pawn_handle.clone(),
+                material: white_material.clone(),
+                transform: {
+                    let mut transform = Transform::from_translation(Vec3::new(x_position_start + (idx as f32), 0., 2.8));
+                    transform.apply_non_uniform_scale(Vec3::new(0.18, 0.18, 0.18));
+                    transform.rotate(Quat::from_rotation_x(1.65));
+                    transform.rotate(Quat::from_rotation_y(1.35));
+                    transform
+                },
+                ..Default::default()
+            });
+        }).id();
+    }
+}
+
+fn create_black_pieces (
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    mut materials: ResMut<Assets<StandardMaterial>>,
+) {
+    let king_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh0/Primitive0");
+    let queen_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh1/Primitive0");
+    let bishop_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh2/Primitive0");
+    let knight_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh3/Primitive0");
+    let rook_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh4/Primitive0");
+    let pawn_handle: Handle<Mesh> = asset_server.load("models/all.glb#Mesh5/Primitive0");
+    let black_material = materials.add(Color::rgb(0.0, 0.2, 0.2).into());
 }
