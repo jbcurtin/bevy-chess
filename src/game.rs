@@ -1,20 +1,12 @@
 use bevy::prelude::*;
 
-use crate::board::*;
+use crate::movement::*;
 
-pub fn active_square_loop(
+pub fn handle_piece_movement_logic(
     mut commands: Commands,
-    piece_query: Query<&Tile>,
+    piece_movement_query: Query<(Entity, &PieceMovement)>,
 ) {
-    
+    for (movement_entity, piece_movement) in piece_movement_query.iter() {
+        println!("Move Piece: {:?}", movement_entity);
+    }   
 }
-
-// if tile_query.is_empty() {
-//     panic!("Tile Query is empty. Tiles must already exist.");
-// }
-// for tile in tile_query.iter() {
-//     if tile.x == column_index && tile.y == row_index {
-//         return *tile;
-//     }
-// }
-// panic!("A tile should always exist for a piece on the board");

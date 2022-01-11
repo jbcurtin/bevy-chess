@@ -9,6 +9,8 @@ mod controls;
 use controls::*;
 mod game;
 use game::*;
+mod movement;
+use movement::*;
 
 fn main() {
     App::new()
@@ -27,7 +29,7 @@ fn main() {
         .add_startup_system(create_board)
         .add_startup_system(create_white_pieces)
         .add_startup_system(create_black_pieces)
-        .add_system(active_square_loop)
+        .add_system(handle_piece_movement_logic)
         .add_system_to_stage(CoreStage::PostUpdate , handle_piece_and_tile_events)
         .run();
 }

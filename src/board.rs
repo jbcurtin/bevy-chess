@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 use bevy_mod_picking::*;
+use crate::movement::*;
 
 pub const COLUMNS: [char; 8] = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
 const ROWS: [char; 8] = ['1', '2', '3', '4', '5', '6', '7', '8'];
@@ -33,7 +34,6 @@ impl Tile {
         format!("{}{}", column, row)
     }
 }
-
 #[derive(Debug, Clone, Copy)]
 pub enum Team {
     White,
@@ -56,6 +56,10 @@ pub struct Piece {
     pub team: Team,
     pub unit: Unit,
     pub tile: Tile,
+}
+pub struct Movement {}
+pub struct Selected {
+    pub moves: Movement
 }
 
 pub fn create_board(
