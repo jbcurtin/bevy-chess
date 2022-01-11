@@ -4,6 +4,10 @@ use crate::movement::*;
 
 pub const COLUMNS: [char; 8] = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
 const ROWS: [char; 8] = ['1', '2', '3', '4', '5', '6', '7', '8'];
+const BORAD_MIN_ROW: u8 = 1;
+const BORAD_MAX_ROW: u8 = 8;
+const BOARD_MAX_COLUMN: char = 'H';
+const BOARD_MIN_COLUMN: char = 'A';
 
 const TILE_SIZE: f32 = 1.0;
 const WHITE_TILE_COLOR: Color = Color::rgb(1.0, 0.9, 0.9);
